@@ -1,0 +1,48 @@
+{
+  "name": "todo_knex",
+  "version": "0.0.1",
+  "description": "my awesome todo apis",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "bin": {
+    "todo": "./bin/todo.js"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-umd": "^6.8.0",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2017": "^1.4.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-babel-istanbul": "^1.4.0",
+    "gulp-eslint": "^3.0.1",
+    "gulp-istanbul": "^1.0.0",
+    "gulp-mocha": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "remap-istanbul": "^0.6.4"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.9.1",
+    "colors": "^1.1.2",
+    "eastasianwidth": "^0.1.1",
+    "editor": "^1.0.0",
+    "fs-extra": "^0.30.0",
+    "inquirer": "^1.1.2",
+    "js-yaml": "^3.6.1",
+    "knex": "^0.11.7",
+    "open": "0.0.5",
+    "source-map-support": "^0.4.2",
+    "sqlite3": "^3.1.4",
+    "yargs": "^5.0.0"
+  }
+}
