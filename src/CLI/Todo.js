@@ -5,6 +5,7 @@ import path from "path";
 
 import fs from "fs-extra";
 import yaml from "js-yaml";
+import editor from "editor";
 
 import Todo from "../Models/Todo.js";
 import {RoutingError} from "../Helper/Errors.js";
@@ -127,8 +128,6 @@ const todo_command={
         });
       },
       edit: function(args){
-        console.log(process.cwd());
-        console.log(__dirname);
         const template_path = path.join(
           __dirname, "../../templates/edit_schema.js");
 
@@ -143,8 +142,24 @@ const todo_command={
               }
             });
           });
-          edit.then(function(filename){
-            console.log(filename + " has created");
+          return edit.then(function(filename){
+            return new Promise(function(resolve, reject){
+              editor(filename, function(code, sig){
+                code > 0 ? reject(code, sig) : resolve(filename);
+              });
+            });
+          }).then(function(filename){
+            var f=require(filename);
+            f(self.knex, self.table_name);
+            return filename;
+          }).then(function(filename){
+            return new Promise(function(resolve, reject){
+              fs.unlink(filename, function(err){
+                err ? reject(err) : resolve();
+              });
+            });
+          }).then(function(){
+            console.log("removed");
           }).catch(function(e){
             console.error(e);
           });
