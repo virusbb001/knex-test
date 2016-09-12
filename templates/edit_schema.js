@@ -11,3 +11,4 @@ function change_schema(knex,table_name){
   });
 }
 
+module.exports = change_schema;
