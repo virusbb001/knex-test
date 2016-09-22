@@ -2,10 +2,9 @@
 import inquirer from "inquirer";
 
 import BaseModel from "./BaseModel";
-import Commandable from "../Helper/Commandable";
 import Table from "../CLI/Tables.js";
 
-class Todo extends Commandable(BaseModel){
+class Todo extends BaseModel{
   get table_name(){
     return "todos";
   }
