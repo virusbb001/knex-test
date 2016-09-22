@@ -7,7 +7,7 @@ import fs from "fs-extra";
 import yaml from "js-yaml";
 import editor from "editor";
 
-import Todo from "../Models/Todo.js";
+import Todo from "./Model.js";
 import {RoutingError} from "../Helper/Errors.js";
 
 let this_yargs;
