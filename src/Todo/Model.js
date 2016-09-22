@@ -1,7 +1,7 @@
 /* eslint no-console: "off", no-debugger: "off" */
 import inquirer from "inquirer";
 
-import BaseModel from "./BaseModel";
+import BaseModel from "../Models/KnexModel.js";
 import Table from "../CLI/Tables.js";
 
 class Todo extends BaseModel{
