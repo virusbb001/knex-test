@@ -1,4 +1,4 @@
-class BaseModel {
+class KnexModel{
   constructor(knex){
     this.knex=knex;
   }
@@ -10,4 +10,4 @@ class BaseModel {
   }
 }
 
-export default BaseModel;
+export default KnexModel;
