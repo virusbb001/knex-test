@@ -1,8 +1,8 @@
 /* eslint no-console: "off", no-debugger: "off" */
 import inquirer from "inquirer";
 
-import BaseModel from "../Models/KnexModel.js";
-import Table from "../CLI/Tables.js";
+import BaseModel from "../../Models/KnexModel.js";
+import Table from "../../CLI/Tables.js";
 
 class Todo extends BaseModel{
   get table_name(){
