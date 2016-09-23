@@ -12,10 +12,10 @@ import Knex from "knex";
 
 import core from "./Core.js";
 import Table from "./CLI/Tables.js";
-import todo_cli from "./CLI/Todo.js";
 import schema from "./CLI/Schema.js";
 
-import Todo from "./Models/Todo.js";
+// import todo_cli from "./CLI/Todo.js";
+import todo from "./apps/Todo";
 
 let knex;
 let root_mapping={};
@@ -37,10 +37,10 @@ function regist_commands(){
     strict().
     help();
 
-  yargs=todo_cli.builder(yargs).
+  yargs=todo.cli.builder(yargs).
     command(schema);
 
-  regist_mapping(todo_cli);
+  regist_mapping(todo.cli);
   regist_mapping(schema);
   return yargs;
 }
@@ -54,7 +54,6 @@ function exec(args){
     },
     useNullAsDefault: true
   });
-  console.log(args);
 
   if(args._[0] in root_mapping){
     var module=root_mapping[args._[0]];
@@ -63,7 +62,7 @@ function exec(args){
   }
 
   // default rooting
-  return todo_cli.routing(args, new todo_cli.target_class(knex));
+  return todo.cli.routing(args, new todo.cli.target_class(knex));
 }
 
 /// 最初に実行するやつ
