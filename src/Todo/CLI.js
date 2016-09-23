@@ -8,7 +8,6 @@ import yaml from "js-yaml";
 import editor from "editor";
 
 import Todo from "./Model.js";
-import {RoutingError} from "../Helper/Errors.js";
 
 let this_yargs;
 
