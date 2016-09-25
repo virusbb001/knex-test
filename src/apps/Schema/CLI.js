@@ -1,5 +1,5 @@
 /* eslint no-console: "off", no-unused-vars: "off" , no-debugger: "off" */
-import Schema from "../Models/Schema.js";
+import Schema from "./Model.js";
 import yaml from "js-yaml";
 
 let this_yargs;
