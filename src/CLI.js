@@ -12,10 +12,9 @@ import Knex from "knex";
 
 import core from "./Core.js";
 import Table from "./CLI/Tables.js";
-import schema from "./CLI/Schema.js";
 
-// import todo_cli from "./CLI/Todo.js";
 import todo from "./apps/Todo";
+import schema from "./apps/Schema";
 
 let knex;
 let root_mapping={};
@@ -38,10 +37,10 @@ function regist_commands(){
     help();
 
   yargs=todo.cli.builder(yargs).
-    command(schema);
+    command(schema.cli);
 
   regist_mapping(todo.cli);
-  regist_mapping(schema);
+  regist_mapping(schema.cli);
   return yargs;
 }
 
