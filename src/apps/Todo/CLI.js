@@ -111,6 +111,11 @@ const todo_command={
             process.stdout.write(schema_yaml+"\n");
           });
         }
+        if(isNaN(args.id-0)){
+          process.stderr.write("id is not number\n"+
+            "use --help for more information\n");
+          return;
+        }
         return self.show(args.id).then(infos =>
           infos.map(info => {
             for(var key in info){
