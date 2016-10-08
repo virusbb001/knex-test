@@ -1,7 +1,7 @@
 /* eslint no-console: "off", no-debugger: "off" */
 import inquirer from "inquirer";
 
-import BaseModel from "../../Models/KnexModel.js";
+import BaseModel from "../../Core/Model/Knex.js";
 import Table from "../../CLI/Tables.js";
 
 class Todo extends BaseModel{
@@ -18,10 +18,9 @@ class Todo extends BaseModel{
    * @todo 表示機能消しても良いかもしれない
    */
   list(){
-    return this.knex.select(...this.list_column).from(this.table_name)
-      .then(rows => {
-        process.stdout.write(Table.rows2table(rows,this.list_column)+"\n");
-      });
+    return super.list().then(rows => {
+      process.stdout.write(Table.rows2table(rows,this.list_column)+"\n");
+    });
   }
 
   /**
