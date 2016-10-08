@@ -8,6 +8,13 @@ class KnexModel{
   schema(){
     return this.knex.table(this.table_name).columnInfo();
   }
+
+  // base functions
+
+  // list all records
+  list(){
+    return this.knex.select(...this.list_column).from(this.table_name);
+  }
 }
 
 export default KnexModel;
