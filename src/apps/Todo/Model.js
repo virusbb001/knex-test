@@ -12,6 +12,15 @@ class Todo extends BaseModel{
     return ["id","taskname"];
   }
 
+  get fields(){
+    return {
+      "id": "int",
+      "taskname": "string",
+      "description": "text",
+      "priority": "int"
+    };
+  }
+
   /**
    * 全件テーブルにして表示
    *
