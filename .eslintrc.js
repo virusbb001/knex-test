@@ -37,6 +37,13 @@ module.exports = {
       {
         "argsIgnorePattern": "^_"
       }
+    ],
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
     ]
   }
 };
