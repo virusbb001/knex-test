@@ -16,8 +16,8 @@ class Schema {
         // and name not like 'sqlite_%' and name like "%";
         query = this.knex.select("name").
           from("sqlite_master").
-          whereIn("type", ["table","view"]).
-          andWhereNot("name","like","sqlite_%");
+          whereIn("type", ["table", "view"]).
+          andWhereNot("name", "like", "sqlite_%");
         break;
       default:
         throw new TypeError(`client ${client} are still not supported`);
