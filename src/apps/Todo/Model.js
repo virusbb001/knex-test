@@ -9,7 +9,7 @@ class Todo extends BaseModel{
     return "todos";
   }
   get list_column(){
-    return ["id","taskname"];
+    return ["id", "taskname"];
   }
 
   get fields(){
@@ -28,7 +28,7 @@ class Todo extends BaseModel{
    */
   list(){
     return super.list().then(rows => {
-      process.stdout.write(Table.rows2table(rows,this.list_column)+"\n");
+      process.stdout.write(Table.rows2table(rows, this.list_column)+"\n");
     });
   }
 
@@ -36,7 +36,7 @@ class Todo extends BaseModel{
    * IDから1つ選んでそれを変える
    */
   show(id){
-    return this.knex.select().where("id",id).from(this.table_name);
+    return this.knex.select().where("id", id).from(this.table_name);
   }
 
   /**
@@ -45,7 +45,7 @@ class Todo extends BaseModel{
    * @param {string} task - task name
    * @param {string} descriptions - task's description
    */
-  add(task,description){
+  add(task, description){
     return this.knex.insert({
       taskname: task,
       description: description
@@ -68,10 +68,10 @@ class Todo extends BaseModel{
     if(isNaN(task_id)){
       throw new Error("task_id is not number");
     }
-    var query = this.knex.table(this.table_name).where("id",task_id);
+    var query = this.knex.table(this.table_name).where("id", task_id);
     return query.clone().select(this.list_column).then(rows => {
       process.stdout.write("will removed\n\n");
-      process.stdout.write(Table.rows2table(rows,this.list_column)+"\n");
+      process.stdout.write(Table.rows2table(rows, this.list_column)+"\n");
     }).then( ()=>{
       return inquirer.prompt({
         type: "confirm",
