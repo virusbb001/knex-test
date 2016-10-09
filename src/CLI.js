@@ -26,11 +26,11 @@ function regist_mapping(module){
 function regist_commands(){
   var yargs = Yargs.
     usage("Usage: $0 <command> [options]").
-    option("d",{
+    option("d", {
       alias: "database",
       describe: "sqlite's database path",
       type: "string",
-      default: path.join(path.dirname(__filename),"..","./todo.sqlite3"),
+      default: path.join(path.dirname(__filename), "..", "./todo.sqlite3"),
       global: true
     }).
     strict().

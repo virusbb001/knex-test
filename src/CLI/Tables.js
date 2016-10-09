@@ -41,7 +41,7 @@ let Table = {
     }
 
     if (Table.isAlign(align)) {
-      return align(text,width,fill);
+      return align(text, width, fill);
     }else{
       throw new TypeError("align should be column_align's property");
     }
@@ -63,11 +63,11 @@ let Table = {
       align_determiner;
 
     let columns_size = Table.getColumnSize(rows);
-    return rows.map( (columns,row_index)=>
-        columns_size.map((size,column_index)=>
+    return rows.map( (columns, row_index)=>
+        columns_size.map((size, column_index)=>
             Table.alignString(
               columns[column_index] === undefined ? "" : ""+columns[column_index],
-              size, determiner(columns[column_index],row_index, column_index)
+              size, determiner(columns[column_index], row_index, column_index)
             )
         ).join(" ")
     ).join("\n");
@@ -80,7 +80,7 @@ let Table = {
   isValidAlignSettings(align_settings){
     return Array.isArray(align_settings)
     ? align_settings.reduce(
-      (prevRes, value) => prevRes && Table.isAlign(value) , true)
+      (prevRes, value) => prevRes && Table.isAlign(value), true)
       : Table.isAlign(align_settings);
   },
 
@@ -88,8 +88,8 @@ let Table = {
    * 行列の列の最大数を取得する
    */
   getColumnSize(rows){
-    return rows.reduce((prev,current) =>
-        prev.map( (prev_value,index)=>
+    return rows.reduce((prev, current) =>
+        prev.map( (prev_value, index)=>
             Math.max(prev_value, eaw.length(
               current[index] !== undefined ? String(current[index]) : "")
             )
@@ -125,12 +125,12 @@ let Table = {
     Table.align.left;
   },
 
-  rows2table(rows,header){
+  rows2table(rows, header){
     var body= rows.map( row=> header.map(prop => row[prop]));
     var split = Table.getColumnSize([header].concat(body)).
       map(v => "-".repeat(v));
     return Table.tableString(
-      [header,split].concat(body),Table.commonDeterminer
+      [header, split].concat(body), Table.commonDeterminer
     );
   }
 };

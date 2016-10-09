@@ -11,15 +11,15 @@ const gulp=require("gulp"),
 
 var coverageVariable;
 
-gulp.task("eslint",() =>
-  gulp.src(["gulpfile.js","src/**/*.js","test/**/*.js"])
+gulp.task("eslint", () =>
+  gulp.src(["gulpfile.js", "src/**/*.js", "test/**/*.js"])
     .pipe(plumber())
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
     );
 
-gulp.task("babel",["eslint"],() =>
+gulp.task("babel", ["eslint"], () =>
     gulp.src("src/**/*.js")
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -28,7 +28,7 @@ gulp.task("babel",["eslint"],() =>
     .pipe(gulp.dest("lib"))
     );
 
-gulp.task("pre-test",["babel"],()=>{
+gulp.task("pre-test", ["babel"], ()=>{
   coverageVariable = "$$cov_" + new Date().getTime() + "$$";
   return gulp.src(["src/**/*.js"])
     .pipe(istanbul({
@@ -37,7 +37,7 @@ gulp.task("pre-test",["babel"],()=>{
     .pipe(istanbul.hookRequire());
 });
 
-gulp.task("mocha",["pre-test"],() =>
+gulp.task("mocha", ["pre-test"], () =>
   gulp.src("test/**/*.js")
     .pipe(plumber({
       errorHandler: function(err){
@@ -51,8 +51,8 @@ gulp.task("mocha",["pre-test"],() =>
     }))
 );
 
-gulp.task("watch",() => {
-  gulp.watch(["src/**/*.js","test/**/*.js"],["mocha"]);
+gulp.task("watch", () => {
+  gulp.watch(["src/**/*.js", "test/**/*.js"], ["mocha"]);
 });
 
-gulp.task("default", ["watch","mocha"]);
+gulp.task("default", ["watch", "mocha"]);

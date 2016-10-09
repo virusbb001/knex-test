@@ -9,7 +9,7 @@ const schema_command={
   describe: "schema management",
   builder: (yargs)=>{
     this_yargs=yargs.
-      command("list","list schemas").
+      command("list", "list schemas").
       command("ls", false).
       command("show <table>", "show schema");
     return this_yargs;
