@@ -11,7 +11,9 @@ class Schema {
     switch(client){
       case "sqlite":
         // query from sqlite's shell.c
-        // select name from sqlite_master where type in ('table','view') and name not like 'sqlite_%' and name like "%";
+        // select name from sqlite_master
+        // where type in ('table','view')
+        // and name not like 'sqlite_%' and name like "%";
         query = this.knex.select("name").
           from("sqlite_master").
           whereIn("type", ["table","view"]).
