@@ -23,9 +23,9 @@ const todo_command={
         help()
     );
     this_yargs=yargs.
-      command("list","[alias: ls] list task").
-      command("ls",false). // alias for list
-      command("add <name...>", "add task",(yargs)=>{
+      command("list", "[alias: ls] list task").
+      command("ls", false). // alias for list
+      command("add <name...>", "add task", (yargs)=>{
         return yargs.
           usage("$0 todo add <task name here> "
             +"--describe <task description here>").
@@ -44,7 +44,7 @@ const todo_command={
           array("name").
           describe("name", "task name...").
           array("description").
-          describe("description","task description").
+          describe("description", "task description").
           help();
       }).
       command("edit <id>", "edit id with $EDITOR", yargs => {
@@ -71,7 +71,7 @@ const todo_command={
    * @param {string[]} args - arguments
    * @param {Todo} self - using Todo's instance
    */
-  routing: (args,self)=>{
+  routing: (args, self)=>{
     if(!self instanceof Todo){
       throw TypeError("self must be instance of Todo");
     }
@@ -138,7 +138,7 @@ const todo_command={
         if(args.id === "schema"){
           var edit = new Promise(function(resolve, reject){
             var tempfile = path.join(os.tmpdir(), "todo_"+ Date.now()+".js");
-            fs.copy(template_path, tempfile,function(err){
+            fs.copy(template_path, tempfile, function(err){
               if(err){
                 reject(err);
               }else{
