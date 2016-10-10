@@ -5,6 +5,9 @@ class KnexModel{
   get table_name(){
     return this.constructor.name;
   }
+  get list_column(){
+    return [];
+  }
   schema(){
     return this.knex.table(this.table_name).columnInfo();
   }
