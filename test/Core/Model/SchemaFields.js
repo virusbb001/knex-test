@@ -96,6 +96,10 @@ describe("SchemaFields", ()=>{
       return subject.create_table(target);
     });
 
+    after(()=>{
+      return knex.schema.dropTableIfExists(target.table_name);
+    });
+
     it("should create table", ()=>{
       return knex.schema.hasTable(target.table_name).then(function(exists){
         expect(exists).to.be.true;
@@ -119,11 +123,11 @@ describe("SchemaFields", ()=>{
         }).then(()=>{done();});
       });
 
-      it("should set one unique column", (done)=>{
+      it("should set single unique column", (done)=>{
         knex(target.table_name).insert({
           field_int: 0,
           field_str: "",
-          unique_int: 1,
+          unique_int: 0,
           unique_pair_a: "another_a",
           unique_pair_b: "another_b"
         }).then(function(){
@@ -132,8 +136,85 @@ describe("SchemaFields", ()=>{
           expect(e).to.match(/unique/i);
           done();
         });
+      });
 
+      it("should set paired unique columns", (done)=>{
+        knex(target.table_name).insert({
+          field_int: 0,
+          field_str: "",
+          unique_int: 1,
+          unique_pair_a: "a",
+          unique_pair_b: "b"
+        }).then(function(){
+          done(new Error("unique_int must be unique but accepted"));
+        }).catch(function(e){
+          expect(e).to.match(/unique/i);
+          done();
+        });
       });
     });
+  });
+
+  describe("self check schema", ()=>{
+    afterEach(()=>{
+      return Promise.all([test_table, test_table_2].map(table=>{
+        return knex.schema.dropTableIfExists(table);
+      })).then(()=>{
+        return knex(subject.table_name).
+          whereIn("table_name", [test_table, test_table_2]).
+          del();
+      });
+    });
+
+    it("should be ok when saved in schema table and actual column are same",
+      ()=>{
+        return knex.schema.createTable(test_table, (table)=>{
+          table.string("field_1");
+          table.integer("field_2");
+        }).then(()=>{
+          return knex(subject.table_name).insert([
+            {
+              "table_name": test_table,
+              "field_name": "field_1",
+              "type": "string"
+            }, {
+              "table_name": test_table,
+              "field_name": "field_2",
+              "type": "integer"
+            }
+          ]);
+        }).then(()=>{
+          return subject.self_schema_check();
+        });
+      }
+    );
+    it("should be not ok when actual column are missing",
+      (done)=>{
+        knex.schema.createTable(test_table, (table)=>{
+          table.string("field_1");
+          table.integer("field_2");
+          table.text("field_3");
+        }).then(()=>{
+          return knex(subject.table_name).insert([
+            {
+              "table_name": test_table,
+              "field_name": "field_1",
+              "type": "string"
+            }, {
+              "table_name": test_table,
+              "field_name": "field_2",
+              "type": "integer"
+            }
+          ]);
+        }).then(()=>{
+          return subject.self_schema_check();
+        }).then(()=>{
+          done(new Error("field_3 is saved but self check is ok"));
+        }, e=>{
+          expect(e).to.match(/field_3/i);
+          done();
+        });
+      }
+    );
   });
 });
