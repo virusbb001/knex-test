@@ -216,5 +216,36 @@ describe("SchemaFields", ()=>{
         });
       }
     );
+    it("should be not ok when expect column are missing",
+      (done)=>{
+        knex.schema.createTable(test_table, (table)=>{
+          table.string("field_1");
+          table.integer("field_2");
+        }).then(()=>{
+          return knex(subject.table_name).insert([
+            {
+              "table_name": test_table,
+              "field_name": "field_1",
+              "type": "string"
+            }, {
+              "table_name": test_table,
+              "field_name": "field_2",
+              "type": "integer"
+            }, {
+              "table_name": test_table,
+              "field_name": "field_3",
+              "type": "text"
+            }
+          ]);
+        }).then(()=>{
+          return subject.self_schema_check();
+        }).then(()=>{
+          done(new Error("subject table has not field_3 but self check is ok"));
+        }, e=>{
+          expect(e).to.match(/field_3/i);
+          done();
+        });
+      }
+    );
   });
 });
