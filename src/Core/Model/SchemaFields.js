@@ -44,6 +44,10 @@ class SchemaField extends KnexModel{
     });
   }
 
+  /**
+   * check saving infomation and actual column
+   * it is check only having same name column
+   */
   self_schema_check(){
     return this.knex(this.table_name).
       distinct("table_name").select().then(tables => {
@@ -81,6 +85,33 @@ class SchemaField extends KnexModel{
         }));
       });
   }
+
+  /**
+   * return then and pass schema is valid
+   */
+  /*
+  check_fields(target){
+    var target_field = target.fields;
+
+    return this.knex(this.table_name).select("field_name", "type").
+      where("table_name", target.table_name).then(function(raws){
+        var fields = raws.map(raw => raw.field_name);
+      });
+  }
+  */
+
+}
+
+/**
+ * get left only value and right only values
+ * it use Array.prototype.includes(it means compare by ===)
+ */
+function diff_array(left, right){
+  return {
+    left: left.filter(left_value => !right.includes(left_value)),
+    right: right.filter(right_value => !left.includes(right_value))
+  };
 }
 
 export default SchemaField;
+export { diff_array };
