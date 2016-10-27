@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -r -d docs src"
   },
   "author": "",
   "license": "MIT",
@@ -39,6 +40,7 @@
     "fs-extra": "^0.30.0",
     "inquirer": "^1.1.2",
     "js-yaml": "^3.6.1",
+    "jsdoc": "^3.4.2",
     "knex": "^0.12.1",
     "open": "0.0.5",
     "source-map-support": "^0.4.2",
