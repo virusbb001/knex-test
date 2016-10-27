@@ -133,7 +133,7 @@ const todo_command={
       },
       edit: function(args){
         const template_path = path.join(
-          __dirname, "../../templates/edit_schema.js");
+          __dirname, "../../../templates/edit_schema.js");
 
         if(args.id === "schema"){
           var edit = new Promise(function(resolve, reject){
@@ -154,10 +154,15 @@ const todo_command={
             });
           }).then(function(filename){
             var f=require(filename);
-            f(self.knex, self.table_name);
-            return filename;
-          }).then(function(filename){
+            return self.knex.transaction(function(trx){
+              return trx.schema.table(self.table_name, f);
+            }).then(function(result){
+              return [filename, result];
+            });
+          }).then(function(ret){
+            var filename=ret[0];
             return new Promise(function(resolve, reject){
+              console.log(ret[1]);
               fs.unlink(filename, function(err){
                 err ? reject(err) : resolve();
               });
