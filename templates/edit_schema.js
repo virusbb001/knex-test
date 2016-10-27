@@ -4,14 +4,11 @@
 // available type is
 // integer, text, string, float, decimal, boolean,
 // date, dateTime, time, timestamp, binary, enum, other various...
-function change_schema(knex,table_name){
-  /*
-  return knex.transaction(function(trx){
-    return trx.schema.table(table_name, function(table){
-      table.integer("priority").unsigned();
-    });
-  });
-  */
+function change_schema(table){
+  // just like
+  // table.text("new_text_column");
 }
 
 module.exports = change_schema;
+
+// vim: sw=2 :
