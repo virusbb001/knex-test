@@ -173,7 +173,6 @@ const todo_command={
             console.error(e);
           });
         }
-
       }
     };
     routing_table.ls = routing_table.list;

@@ -16,9 +16,12 @@ import Table from "./CLI/Tables.js";
 import todo from "./apps/Todo";
 import schema from "./apps/Schema";
 
+import apps, {default_key} from "./apps";
+
 let knex;
 let root_mapping={};
 
+// add first command
 function regist_mapping(module){
   root_mapping[module.command]=module;
 }
@@ -36,12 +39,15 @@ function regist_commands(){
     strict().
     help();
 
-  yargs=todo.cli.builder(yargs).
-    command(schema.cli);
-
   regist_mapping(todo.cli);
   regist_mapping(schema.cli);
-  return yargs;
+
+  var def_cli = apps[default_key].cli;
+  yargs=def_cli.builder(yargs);
+  return Object.keys(apps).filter(v => v!=default_key).
+    reduce(function(yargs, key){
+      return yargs.command(apps[key].cli);
+    }, yargs);
 }
 
 /// メインルーティング
