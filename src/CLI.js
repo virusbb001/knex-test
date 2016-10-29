@@ -39,8 +39,9 @@ function regist_commands(){
     strict().
     help();
 
-  regist_mapping(todo.cli);
-  regist_mapping(schema.cli);
+  for(var app in apps){
+    regist_mapping(apps[app].cli);
+  }
 
   var def_cli = apps[default_key].cli;
   yargs=def_cli.builder(yargs);
