@@ -68,7 +68,9 @@ function exec(args){
   }
 
   // default rooting
-  return todo.cli.routing(args, new todo.cli.target_class(knex));
+  return apps[default_key].cli.routing(
+    args, new apps[default_key].cli.target_class(knex)
+  );
 }
 
 /// 最初に実行するやつ
