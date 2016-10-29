@@ -1,4 +1,4 @@
-/* eslint no-console: "off", no-unused-vars: "off" , no-debugger: "off" */
+/* eslint no-console: "off", no-unused-vars: "error" , no-debugger: "off" */
 "use strict";
 
 import "source-map-support/register";
@@ -6,15 +6,7 @@ import "source-map-support/register";
 import path from "path";
 
 import Yargs from "yargs";
-import colors from "colors/safe";
-import yaml from "js-yaml";
 import Knex from "knex";
-
-import core from "./Core.js";
-import Table from "./CLI/Tables.js";
-
-import todo from "./apps/Todo";
-import schema from "./apps/Schema";
 
 import apps, {default_key} from "./apps";
 
@@ -74,7 +66,7 @@ function exec(args){
 }
 
 /// 最初に実行するやつ
-function run(argv){
+function run(){
   var yargs=regist_commands();
 
   Promise.resolve(exec(yargs.argv)).
