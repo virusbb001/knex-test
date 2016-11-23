@@ -15,7 +15,7 @@ const schema_command={
     return this_yargs;
   },
   routing: (args, self, root_mapping)=>{
-    if(!self instanceof Schema){
+    if(!(self instanceof Schema)){
       throw TypeError("self must be instance of Schema");
     }
 

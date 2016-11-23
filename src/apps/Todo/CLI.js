@@ -72,7 +72,7 @@ const todo_command={
    * @param {Todo} self - using Todo's instance
    */
   routing: (args, self)=>{
-    if(!self instanceof Todo){
+    if(!(self instanceof Todo)){
       throw TypeError("self must be instance of Todo");
     }
 
