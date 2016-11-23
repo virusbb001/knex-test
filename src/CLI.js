@@ -8,6 +8,8 @@ import path from "path";
 import Yargs from "yargs";
 import Knex from "knex";
 
+import core_app from "./Core/apps";
+
 import apps, {default_key} from "./apps";
 
 let knex;
@@ -35,8 +37,10 @@ function regist_commands(){
     regist_mapping(apps[app].cli);
   }
 
+  regist_mapping(core_app.cli);
+
   var def_cli = apps[default_key].cli;
-  yargs=def_cli.builder(yargs);
+  yargs=def_cli.builder(yargs).command(core_app.cli);
   return Object.keys(apps).filter(v => v!=default_key).
     reduce(function(yargs, key){
       return yargs.command(apps[key].cli);
