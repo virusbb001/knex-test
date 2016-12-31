@@ -1,4 +1,4 @@
-/* eslint no-console: "off", no-unused-vars: "off"  */
+/* eslint no-console: "off" */
 import fs from "fs";
 import yaml from "js-yaml";
 
