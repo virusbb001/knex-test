@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "doc": "jsdoc -r -d docs src"
+    "doc": "jsdoc -r -d docs src",
+    "eslint": "eslint \"src/**/*.js\""
   },
   "author": "",
   "license": "MIT",
@@ -45,6 +46,7 @@
     "open": "0.0.5",
     "source-map-support": "^0.4.2",
     "sqlite3": "^3.1.4",
-    "yargs": "^6.0.0"
+    "yargs": "^6.0.0",
+    "todo-knex-core": "file:./lib/Base"
   }
 }

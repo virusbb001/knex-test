@@ -1,22 +1,24 @@
-import knexModel from "../../../src/Core/Model/Knex.js";
+import Core from "todo-knex-core";
 
 import Knex from "knex";
 import chai from "chai";
 
+const knexModel = Core.Knex.Model;
+
 var expect=chai.expect;
 
-describe("KnexModel", ()=>{
-  var knex,
-    subject;
+var knex=new Knex({
+  client: "sqlite3",
+  useNullAsDefault: true,
+  connection: {
+    filename: ":memory:"
+  }
+});
 
-  before(() => {
-    knex=new Knex({
-      client: "sqlite3",
-      useNullAsDefault: true,
-      connection: {
-        filename: ":memory:"
-      }
-    });
+describe("KnexModel", ()=>{
+  var subject;
+
+  before(function(){
     subject=new knexModel(knex);
   });
 
