@@ -69,7 +69,7 @@ class Todo extends BaseModel{
       return inquirer.prompt({
         type: "confirm",
         name: "remove",
-        message: "Are you really remove?",
+        message: "Do you really remove?",
         default: false
       });
     }).then( answer => {
